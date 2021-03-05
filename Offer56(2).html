@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> I. 数组中数字出现的次数</title>
+</head>
+
+<body>
+  <!-- 在一个数组 nums 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。 -->
+  <!-- https://leetcode-cn.com/leetbook/read/illustration-of-algorithm/eubbnm/ -->
+</body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @return {number[]}
+   */
+  // var singleNumbers = function (nums) {
+  //   var single = [];
+  //   for (let i = 0; i < nums.length; i++) {
+  //     let resLeft = isExist(0, nums[i], i, nums);
+  //     let resRight = isExist(i + 1, nums[i], nums.length, nums)
+  //     if (resLeft && resRight) {
+  //       single.push(nums[i]);
+  //     }
+  //   }
+  //   console.log("res: ", single);
+  // };
+  var isExist = function (i, v, len, nums) {
+    for (let m = i; m < len; m++) {
+      if (v == nums[m]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  var nums = [9,1,7,9,7,9,7];
+  var singleNumbers = function (nums) {
+    var x = 0,
+      y = 0,
+      n = 0,
+      m = 1;
+    nums.forEach(element => {
+      n = n ^ element;
+    });
+    console.log("n: ", n);
+    while (!(n & m)) {
+      m <<= 1;
+    }
+    console.log("m: ", m);
+    nums.forEach(element => {
+      if (element & m) {
+        x ^= element;
+      } else {
+        y ^= element;
+      }
+    });
+    console.log("x, y: ", x, y);
+    return x, y;
+  }
+  singleNumbers(nums);
+</script>
+
+</html>
