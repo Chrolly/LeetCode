@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  var array = [5, 1, 9, 7, 2, 3, 4, 6, 8];
+
+  function bubbleSort(arr) {
+    var len = arr.length;
+    for (var i = 0; i < len - 1; i++) {
+      for (var j = 0; j < len - 1 - i; j++) {
+        if (arr[j] > arr[j + 1]) { // 相邻元素两两对比
+          var temp = arr[j + 1]; // 元素交换
+          arr[j + 1] = arr[j];
+          arr[j] = temp;
+        }
+      }
+    }
+    console.log("array: ", arr);
+    return arr;
+  }
+  // console.time("timeName");
+  // bubbleSort(array);
+  // console.timeEnd("timeName")
+
+  function selectionSort(arr) {
+    var len = arr.length;
+    var minIndex, temp;
+    for (var i = 0; i < len - 1; i++) {
+      minIndex = i;
+      for (var j = i + 1; j < len; j++) {
+        if (arr[j] < arr[minIndex]) { //    寻找最小的数 
+          minIndex = j; // 将最小数的索引保存 
+        }
+      }
+      temp = arr[i];
+      arr[i] = arr[minIndex];
+      arr[minIndex] = temp;
+    }
+    console.log("array: ", arr);
+    return arr;
+  }
+
+  function insertionSort(arr) {
+    var len = arr.length;
+    var preIndex, current;
+    for (var i = 1; i < len; i++) {
+      preIndex = i - 1;
+      current = arr[i];
+      while (preIndex >= 0 && arr[preIndex] > current) {
+        arr[preIndex + 1] = arr[preIndex];
+        preIndex--;
+      }
+      arr[preIndex + 1] = current;
+    }
+    console.log("array: ", arr);
+    return arr;
+  }
+
+  function quickSort(arr, left, right) {
+    var len = arr.length,
+        partitionIndex,
+        left = typeof left != 'number' ? 0 : left,
+        right = typeof right != 'number' ? len - 1 : right;
+
+    if (left < right) {
+        partitionIndex = partition(arr, left, right);
+        quickSort(arr, left, partitionIndex-1);
+        quickSort(arr, partitionIndex+1, right);
+    }
+    return arr;
+}
+
+function partition(arr, left ,right) {     // 分区操作
+    var pivot = left,                      // 设定基准值（pivot）
+        index = pivot + 1;
+    for (var i = index; i <= right; i++) {
+        if (arr[i] < arr[pivot]) {
+            swap(arr, i, index);
+            index++;
+        }        
+    }
+    swap(arr, pivot, index - 1);
+    return index-1;
+}
+
+function swap(arr, i, j) {
+    var temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+function partition2(arr, low, high) {
+  let pivot = arr[low];
+  while (low < high) {
+    while (low < high && arr[high] > pivot) {
+      --high;
+    }
+    arr[low] = arr[high];
+    while (low < high && arr[low] <= pivot) {
+      ++low;
+    }
+    arr[high] = arr[low];
+  }
+  arr[low] = pivot;
+  return low;
+}
+
+function quickSort2(arr, low, high) {
+  if (low < high) {
+    let pivot = partition2(arr, low, high);
+    quickSort2(arr, low, pivot - 1);
+    quickSort2(arr, pivot + 1, high);
+  }
+  return arr;
+}
+  console.time("timeName");
+  insertionSort(array);
+  console.timeEnd("timeName")
+</script>
+
+</html>
