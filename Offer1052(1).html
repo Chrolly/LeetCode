@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  /**
+   * @param {number[]} customers
+   * @param {number[]} grumpy
+   * @param {number} X
+   * @return {number}
+   */
+  var maxSatisfied = function (customers, grumpy, X) {
+    var len_c = customers.length,
+      len_g = grumpy.length;
+    if (len_c !== len_g) return;
+    var sum = 0;
+
+    // 先求所有不生气时间内的顾客总数
+    for (var i = 0; i < len_c; i++) {
+      sum += customers[i] * (!grumpy[i]);
+    }
+
+    // 新增加的顾客不生气的人数
+    var increCustomers = 0;
+    for (var i = 0; i < X; i++) {
+      increCustomers += customers[i] * grumpy[i];
+    }
+    var max = increCustomers;
+    for (i = X; i < len_c; i++) {
+      increCustomers += customers[i] * grumpy[i];
+      if (grumpy[i - X] === 1) {
+        increCustomers -= customers[i - X];
+      }
+      max = max < increCustomers ? increCustomers : max;
+    }
+    console.log("max: ", sum+max);
+  };
+
+  // var maxSatisfied = function (customers, grumpy, X) {
+  //   let total = 0;
+  //   const n = customers.length;
+  //   for (let i = 0; i < n; i++) {
+  //     if (grumpy[i] === 0) {
+  //       total += customers[i];
+  //     }
+  //   }
+  //   let increase = 0;
+  //   for (let i = 0; i < X; i++) {
+  //     increase += customers[i] * grumpy[i];
+  //   }
+  //   let maxIncrease = increase;
+  //   for (let i = X; i < n; i++) {
+  //     increase = increase -
+  //       customers[i - X] * grumpy[i - X] + customers[i] * grumpy[i];
+  //     maxIncrease = Math.max(maxIncrease, increase);
+  //   }
+  //   console.log("max: ", total + maxIncrease);
+  //   return total + maxIncrease;
+  // };
+
+  // var customers = [4, 10, 10],
+  //   grumpy = [1, 1, 0],
+  //   X = 2;
+  var customers = [1,0,1,2,1,1,7,5], grumpy = [0,1,0,1,0,1,0,1], X = 3;
+  maxSatisfied(customers, grumpy, X);
+</script>
+
+</html>

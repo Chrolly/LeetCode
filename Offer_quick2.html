@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  // 双指针+递归
+  function partition(arr, low, high) {
+    let pivot = low; //基数
+    while (low < high) {
+      while (low < high && arr[high]> arr[pivot]) {
+        --high;
+      } //找到第一个比基数小的位置
+      while (low < high && arr[low] <=arr[pivot]) {
+        ++low;
+      } //找到第一个比基数大的位置 
+      swap(arr, low, high);
+    }
+    swap(arr, low, pivot)
+    return low;
+  }
+
+  function quickSort(arr, low, high) {
+    if (low < high) {
+      let pivot = partition(arr, low, high);
+      quickSort(arr, low, pivot - 1);
+      quickSort(arr, pivot + 1, high);
+    }
+    return arr;
+  }
+
+  function quickSort_step(arr) {
+    quickSort(arr, 0, arr.length - 1);
+    console.log("arr: ", arr);
+  }
+
+  function swap(arr, i, j) {
+    var temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+  }
+  var array = [2,2,1,1,1,2,2];
+  quickSort_step(array);
+</script>
+
+</html>

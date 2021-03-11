@@ -47,16 +47,17 @@
     arr[j] = temp;
   }
 
+  // 双指针+递归
   function partition2(arr, low, high) {
-    let pivot = arr[low];
+    let pivot = arr[low]; //基数
     while (low < high) {
       while (low < high && arr[high] > pivot) {
         --high;
-      }
-      arr[low] = arr[high];
+      } //找到第一个比基数小的位置
+      arr[low] = arr[high]; 
       while (low < high && arr[low] <= pivot) {
         ++low;
-      }
+      } //找到第一个比基数大的位置
       arr[high] = arr[low];
     }
     arr[low] = pivot;

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- https://leetcode-cn.com/problems/two-sum/ -->
+</body>
+<script>
+  /**
+   * @param {number[]} nums
+   * @param {number} target
+   * @return {number[]}
+   */
+  var twoSum = function (nums, target) {
+    var len = nums.length;
+    for (var i = 0; i < len; i++) {
+      var another = target - nums[i];
+      // console.log("target: ", nums[i], another);
+      var targetIndex = nums.findIndex((item, index) => {
+        if (index !== i) {
+          return item === another;
+        }
+      });
+      targetIndex = targetIndex < 0 ? 0  : targetIndex;
+      // console.log("targetIndex: ", targetIndex);
+      if (targetIndex) {
+        console.log("indexR: ", [i, targetIndex]);
+        break;
+      }
+      // console.log("index: ", [i, targetIndex]);
+    }
+  };
+
+  // var nums = [2,7,11,15], target = 9;
+  // var nums = [3, 3],
+  //   target = 6;
+  var nums = [3, 2, 4],
+    target = 6;
+  twoSum(nums, target)
+</script>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  /**
+   * @param {number[]} customers
+   * @param {number[]} grumpy
+   * @param {number} X
+   * @return {number}
+   */
+  var maxSatisfied = function (customers, grumpy, X) {
+    var len_c = customers.length,
+      len_g = grumpy.length;
+    if (len_c !== len_g) return;
+    var sum;
+    var res = [];
+    for (var i = 0; i < len_c; i++) {
+      sum += customers[i] * (!grumpy[i]);
+    }
+    res.push(sum);
+
+    for (var i = 0; i < len_c - X + 1; i++) {
+      sum = 0;
+      var leftR = unSatisfy(customers, grumpy, 0, i);
+      var minR = Satisfy(customers, grumpy, i, i + X);
+      var rightR = unSatisfy(customers, grumpy, i + X, len_c);
+      sum = leftR + minR + rightR;
+      console.log("res: ", leftR, minR, rightR);
+      console.log("sum: ", sum);
+      res.push(sum);
+    }
+    console.log("res: ", res);
+    var max = res[0];
+    for (let j = 0; j < res.length; j++) {
+      if (max < res[j]) {
+        max = res[j];
+      }
+    }
+    console.log("max: ", max);
+  };
+
+  var unSatisfy = function (customers, grumpy, start, end) {
+    var _sum = 0;
+    for (let i = start; i < end; i++) {
+      _sum += customers[i] * (!grumpy[i]);
+    }
+    return _sum;
+  }
+
+  var Satisfy = function (customers, grumpy, start, end) {
+    var _sum = 0;
+    for (let i = start; i < end; i++) {
+      _sum += customers[i];
+    }
+    return _sum;
+  }
+
+  // var customers = [1, 0, 1, 2, 1, 1, 7, 5],
+  //   grumpy = [0, 1, 0, 1, 0, 1, 0, 1],
+  //   X = 3;
+  var customers = [4,10,10],
+  grumpy = [1,1,0],
+  X = 2;
+  maxSatisfied(customers, grumpy, X);
+</script>
+
+</html>

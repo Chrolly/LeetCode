@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- https://leetcode-cn.com/problems/container-with-most-water/ -->
+</body>
+<script>
+  /**
+   * @param {number[]} height
+   * @return {number}
+   */
+  var maxArea = function (height) {
+    var len = height.length;
+    var maxValue = 0;
+    var computeS = function (height, i, j) {
+      var h = min(height[i], height[j]);
+      var w = j - i;
+      var s = w * h;
+      console.log("w, h, s: ", w, h, s);
+      return s;
+    }
+    for (var i = 0, j = len - 1; i < len && j > i;) {
+      maxValue = max(computeS(height, i, j), maxValue);
+      if (height[i] < height[j]) {
+        i++;
+        continue;
+      } else {
+        --j;
+        continue;
+      }
+    }
+    console.log("maxValue: ", maxValue);
+  };
+
+  var min = function (a, b) {
+    return a > b ? b : a;
+  }
+  var max = function (a, b) {
+    return a > b ? a : b;
+  }
+
+  var height = [1, 8, 6, 2, 5, 4, 8, 3, 7];
+  // var height = [1,2];
+  maxArea(height);
+</script>
+
+</html>

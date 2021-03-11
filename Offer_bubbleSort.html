@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  var bubbleSort = function (nums) {
+    var len = nums.length;
+    for (var i = 0; i < len - 1; i++) {
+      for (var j = 0; j < len - i - 1; j++) {
+        if (nums[j] > nums[j + 1]) {
+          swap(nums, j, j + 1)
+        }
+      }
+    }
+    console.log("nums: ", nums);
+  }
+
+
+  var bubbleSort2 = function (nums) {
+    var swaped = true;
+    var len = nums.length;
+    for (var i = 0; i < len - 1; i++) {
+      if (!swaped) break;
+      swaped = false;
+      for (var j = 0; j < len - i - 1; j++) {
+        if (nums[j] > nums[j + 1]) {
+          swap(nums, j, j + 1);
+          swaped = true;
+        }
+      }
+    }
+    console.log("nums2: ", nums);
+  }
+
+  var bubbleSort3 = function(nums){
+
+  }
+
+  var swap = function (nums, i, j) {
+    var temp = nums[i];
+    nums[i] = nums[j];
+    nums[j] = temp;
+  }
+
+  nums = [0, 1, 0, 3, 12];
+  bubbleSort(nums);
+  bubbleSort2(nums);
+</script>
+
+</html>
